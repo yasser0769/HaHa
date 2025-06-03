@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مدونتي</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <button id="theme-toggle" aria-label="Toggle theme">&#9728;</button>
+      <div class="branding">
+        <img class="avatar" src="avatar.jpg" alt="avatar" />
+        <div class="intro">
+          <h1 class="title">عنوان المدونة</h1>
+          <p class="description">وصف قصير للمدونة</p>
+        </div>
+      </div>
+      <nav class="site-nav">
+        <a href="#">الرئيسية</a>
+        <a href="#">حول</a>
+        <a href="#">اتصل بنا</a>
+      </nav>
+      <form class="search-form" role="search">
+        <input type="search" placeholder="بحث" />
+      </form>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- مثال على أنواع التدوينات المختلفة -->
+    <article class="post text-post">
+      <h2>عنوان التدوينة النصية</h2>
+      <p>هذا مثال لتدوينة نصية على تمبلر.</p>
+    </article>
+
+    <article class="post photo-post">
+      <h2>صورة</h2>
+      <img src="photo.jpg" alt="مثال صورة" />
+    </article>
+
+    <article class="post quote-post">
+      <blockquote>
+        "اقتباس جميل هنا"
+      </blockquote>
+      <cite>— القائل</cite>
+    </article>
+
+    <article class="post link-post">
+      <h2><a href="https://example.com">رابط مفيد</a></h2>
+    </article>
+
+    <article class="post chat-post">
+      <h2>محادثة</h2>
+      <ul class="chat">
+        <li><strong>أ:</strong> مرحبًا!</li>
+        <li><strong>ب:</strong> أهلًا!</li>
+      </ul>
+    </article>
+
+    <article class="post audio-post">
+      <h2>مقطع صوتي</h2>
+      <audio controls src="audio.mp3"></audio>
+    </article>
+
+    <article class="post video-post">
+      <h2>فيديو</h2>
+      <video controls src="video.mp4"></video>
+    </article>
+  </main>
+
+  <footer class="site-footer container">
+    <div class="social-icons">
+      <!-- روابط اختيارية لوسائل التواصل -->
+      <a href="#" aria-label="Instagram" class="icon instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm0 2h10c1.654 0 3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 1.346-3 3-3zm5 3a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6zm4.5-.1a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2z"/></svg>
+      </a>
+      <a href="#" aria-label="Pinterest" class="icon pinterest">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.486 2 2 6.486 2 12c0 4.241 2.684 7.868 6.439 9.299-.089-.79-.17-2.003.036-2.865.187-.799 1.206-5.096 1.206-5.096s-.307-.614-.307-1.522c0-1.428.828-2.495 1.861-2.495.877 0 1.301.658 1.301 1.448 0 .883-.563 2.202-.855 3.428-.244 1.033.517 1.873 1.536 1.873 1.844 0 3.259-1.944 3.259-4.749 0-2.48-1.783-4.217-4.325-4.217-2.946 0-4.683 2.209-4.683 4.491 0 .89.342 1.845.77 2.364.085.103.097.193.072.297-.079.327-.253 1.036-.288 1.182-.045.188-.149.229-.345.138-1.285-.599-2.088-2.476-2.088-3.985 0-3.247 2.361-6.23 6.814-6.23 3.575 0 6.362 2.548 6.362 5.953 0 3.555-2.242 6.412-5.352 6.412-1.045 0-2.026-.542-2.362-1.182l-.642 2.445c-.231.894-.858 2.013-1.279 2.699.964.297 1.981.458 3.046.458 5.514 0 10-4.486 10-10S17.514 2 12 2z"/></svg>
+      </a>
+      <a href="#" aria-label="YouTube" class="icon youtube">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.615 3.184C21.505 3.634 22 5.33 22 8v8c0 2.667-.495 4.366-2.385 4.815C17.73 21.617 12 21.7 12 21.7s-5.73-.083-7.615-.385C2.495 20.366 2 18.667 2 16V8c0-2.67.495-4.367 2.385-4.816C6.27 2.383 12 2.3 12 2.3s5.73.083 7.615.884zM10 9.5v5l5-2.5-5-2.5z"/></svg>
+      </a>
+    </div>
+    <p>&copy; 2023</p>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top">&#9650;</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

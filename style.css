@@ -1,0 +1,133 @@
+/* Base styling */
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --secondary: #f5f5f5;
+  --accent: #bfa362; /* gold */
+  --transition: 0.3s ease;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  margin: 0;
+  line-height: 1.6;
+  direction: rtl;
+}
+body.dark {
+  --bg: #121212;
+  --text: #f5f5f5;
+  --secondary: #1e1e1e;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Blacks', 'Black Han Sans', sans-serif;
+}
+.container {
+  width: 90%;
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+}
+.site-header {
+  background: var(--secondary);
+  padding: 1rem 0;
+}
+.site-header .branding {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.site-header .avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.site-nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.site-nav a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.site-nav a:hover {
+  color: var(--accent);
+}
+.search-form {
+  margin-top: 1rem;
+}
+.search-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+.post {
+  background: var(--secondary);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+}
+.post img,
+.post video {
+  max-width: 100%;
+  height: auto;
+}
+.chat {
+  list-style: none;
+  padding: 0;
+}
+.chat li {
+  padding: 0.25rem 0;
+}
+.site-footer {
+  text-align: center;
+  padding: 2rem 0;
+  background: var(--secondary);
+}
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.icon svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text);
+  transition: fill var(--transition);
+}
+.icon:hover svg {
+  fill: var(--accent);
+}
+#back-to-top {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: none;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+@media (min-width: 600px) {
+  .site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .search-form {
+    margin-top: 0;
+  }
+}
