@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{Title}{block:SearchPage} ({lang:Search results for SearchQuery}){/block:SearchPage}{block:PermalinkPage}{block:PostSummary} — {PostSummary}{/block:PermalinkPage}</title>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var likeElements = document.querySelectorAll('.note.like .action');
+    likeElements.forEach(function (el) {
+      el.innerHTML = el.innerHTML.replace('liked this', 'أعجبه هذا المنشور');
+    });
+    var reblogElements = document.querySelectorAll('.note.reblog .action');
+    reblogElements.forEach(function (el) {
+      el.innerHTML = el.innerHTML.replace('reblogged this from', 'أعاد نشره من');
+    });
+    var postedElements = document.querySelectorAll('.note.original_post .action');
+    postedElements.forEach(function (el) {
+      el.innerHTML = el.innerHTML.replace('posted this', 'قام بنشره');
+    });
+  });
+  </script>
+
+  <style>
+  @font-face {
+    font-family: 'Dubai';
+    src: url('https://static.tumblr.com/8cspwwp/5aKskz3k3/dubai-regular.ttf') format('truetype');
+  }
+  body {
+    font-family: 'Dubai', sans-serif;
+    direction: rtl;
+    margin: 0;
+  }
+  .navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .navigation li {
+    display: inline-block;
+    margin-left: 10px;
+  }
+  #myBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: #553000;
+    color: #fff;
+    cursor: pointer;
+  }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<div class="navigation">
+  <ul>
+    <li><a href="{BlogURL}" class="home-link">الرئيسية</a></li>
+    <li><a href="/WhoAmI" class="home-link">من أنا</a></li>
+    <li><a href="/MyTrips" class="home-link">رحلاتي</a></li>
+    {block:HasPages}{block:Pages}<li><a href="{URL}" class="home-link">{Label}</a></li>{/block:Pages}{/block:HasPages}
+    {block:AskEnabled}<li><a href="/ask" class="home-link">اسألني</a></li>{/block:AskEnabled}
+    {block:IfShowArchive}<li><a href="/archive" class="home-link">الإرشيف</a></li>{/block:IfShowArchive}
+    <li><a href="/random" class="home-link">عشوائي</a></li>
+    <li><a href="/submit" class="home-link">شاركني التدوين</a></li>
+  </ul>
+</div>
+
+<!-- Back to top button -->
+<button id="myBtn" aria-label="Back to top">▲</button>
+
+<script>
+var btn = document.getElementById('myBtn');
+window.addEventListener('scroll', function () {
+  btn.style.display = window.scrollY > 20 ? 'block' : 'none';
+});
+btn.addEventListener('click', function () {
+  const start = window.pageYOffset;
+  const duration = 1000;
+  let startTime = null;
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+  function animation(currentTime) {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const progress = timeElapsed / duration;
+    const easing = easeInOutCubic(progress);
+    window.scrollTo(0, start * (1 - easing));
+    if (timeElapsed < duration) {
+      requestAnimationFrame(animation);
+    }
+  }
+  requestAnimationFrame(animation);
+});
+</script>
+</body>
+</html>
