@@ -1,0 +1,156 @@
+<!-- تعليمات الاستخدام:
+1. انسخ هذا الكود إلى ملف بصيغة .html على جهازك.
+2. افتح الملف باستخدام أي متصفح حديث (كروم، فايرفوكس، إلخ).
+3. استخدم الأزرار لعرض الكلمات وإضافة كلمات جديدة.
+4. ستُحفظ الكلمات المضافة في المتصفح وتظهر بعد إعادة فتح الصفحة. -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>بطاقات كلمات صيني-عربي</title>
+<style>
+/* تنسيق عام وتجاوب باستخدام Flexbox */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+#container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+button {
+    padding: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+}
+button:hover {background-color: #45a049;}
+#word {font-size: 2em; margin: 20px 0;}
+#answer {display: none; font-size: 1.2em;}
+/* تنسيق النافذة المنبثقة لإضافة كلمات */
+#modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+#modalContent {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+input {padding: 8px; font-size: 1em;}
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="word"></div>
+    <div id="answer"></div>
+    <button id="showAnswer">إظهار الإجابة</button>
+    <button id="newCard">بطاقة جديدة</button>
+    <button id="addWord">أضف كلمة جديدة</button>
+</div>
+<!-- نافذة إضافة كلمة جديدة -->
+<div id="modal">
+  <div id="modalContent">
+    <input type="text" id="newChinese" placeholder="الكلمة بالصينية">
+    <input type="text" id="newPinyin" placeholder="pinyin">
+    <input type="text" id="newMeaning" placeholder="المعنى بالعربية">
+    <button id="saveWord">حفظ</button>
+    <button id="closeModal">إغلاق</button>
+  </div>
+</div>
+<script>
+// مصفوفة افتراضية بعشر كلمات صينية مع pinyin والمعنى
+const defaultWords = [
+  {ch: '工作', py: 'gōngzuò', ar: 'عمل'},
+  {ch: '医生', py: 'yīshēng', ar: 'طبيب'},
+  {ch: '学生', py: 'xuéshēng', ar: 'طالب'},
+  {ch: '老师', py: 'lǎoshī', ar: 'أستاذ'},
+  {ch: '朋友', py: 'péngyǒu', ar: 'صديق'},
+  {ch: '学习', py: 'xuéxí', ar: 'تعلم'},
+  {ch: '学校', py: 'xuéxiào', ar: 'مدرسة'},
+  {ch: '中国', py: 'Zhōngguó', ar: 'الصين'},
+  {ch: '谢谢', py: 'xièxie', ar: 'شكراً'},
+  {ch: '你好', py: 'nǐhǎo', ar: 'مرحباً'}
+];
+// جلب الكلمات المخزنة أو استخدام الافتراضية
+let words = JSON.parse(localStorage.getItem('words')) || defaultWords.slice();
+let currentIndex = 0;
+const wordDiv = document.getElementById('word');
+const answerDiv = document.getElementById('answer');
+const showBtn = document.getElementById('showAnswer');
+const newBtn = document.getElementById('newCard');
+const addBtn = document.getElementById('addWord');
+const modal = document.getElementById('modal');
+const saveBtn = document.getElementById('saveWord');
+const closeModalBtn = document.getElementById('closeModal');
+// عرض بطاقة جديدة عشوائياً
+function showNewCard() {
+  currentIndex = Math.floor(Math.random() * words.length);
+  const word = words[currentIndex];
+  wordDiv.textContent = word.ch;
+  answerDiv.textContent = `${word.py} - ${word.ar}`;
+  answerDiv.style.display = 'none';
+}
+// إظهار الإجابة
+showBtn.onclick = () => {
+  answerDiv.style.display = 'block';
+};
+// زر بطاقة جديدة
+newBtn.onclick = showNewCard;
+// فتح نافذة إضافة كلمة
+addBtn.onclick = () => {
+  modal.style.display = 'flex';
+};
+// إغلاق النافذة
+closeModalBtn.onclick = () => {
+  modal.style.display = 'none';
+  document.getElementById('newChinese').value = '';
+  document.getElementById('newPinyin').value = '';
+  document.getElementById('newMeaning').value = '';
+};
+// حفظ الكلمة الجديدة في localStorage
+saveBtn.onclick = () => {
+  const ch = document.getElementById('newChinese').value.trim();
+  const py = document.getElementById('newPinyin').value.trim();
+  const ar = document.getElementById('newMeaning').value.trim();
+  if (ch && py && ar) {
+    words.push({ch, py, ar});
+    localStorage.setItem('words', JSON.stringify(words));
+    modal.style.display = 'none';
+    document.getElementById('newChinese').value = '';
+    document.getElementById('newPinyin').value = '';
+    document.getElementById('newMeaning').value = '';
+    showNewCard();
+  }
+};
+// عند أول تحميل الصفحة
+showNewCard();
+</script>
+</body>
+</html>
